@@ -6,5 +6,5 @@ kernel_parameters:
    value: 'on'
  - key: 'vfio-pci.ids'
    value: '10de:2489,10de:228b'
- - key: 'rd.driver.pre'
-   value: 'vfio-pci'
+ # - key: 'rd.driver.pre'
+ #   value: 'vfio-pci'
