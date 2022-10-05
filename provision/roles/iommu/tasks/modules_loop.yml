@@ -1,0 +1,11 @@
+---
+- name: 'Check if module {{ item }} is in /etc/modules'
+  shell: 'grep -c "{{ item }}" /etc/modules || true'
+  register: test_module
+
+- name: 'Add {{ item }} to kernel modules to load at boot time'
+  become: yes
+  lineinfile:
+    dest: /etc/modules
+    line: '{{ item }}'
+  when: test_module.stdout == "0"

@@ -1,0 +1,22 @@
+---
+- name: 'Install required packages'
+  become: yes
+  apt:
+    name: ['libvirt-daemon-system', 'libvirt-clients', 'virt-manager']
+    state: present
+
+- name: 'Add "users" to libvirt group'
+  become: yes
+  user:
+    name: "{{ item }}"
+    groups: ['libvirt']
+    append: yes
+  with_items:
+    - "{{ users }}"
+
+- name: 'Start libvirtd service'
+  become: yes
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes

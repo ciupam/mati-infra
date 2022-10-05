@@ -1,0 +1,6 @@
+---
+- name: 'Install required packages'
+  become: yes
+  apt:
+    name: ['qemu-system']
+    state: present

@@ -1,0 +1,14 @@
+packages:
+  - python3-pip
+  - net-tools
+  - etckeeper
+  - htop
+  - tcpdump
+  - netcat-openbsd
+  - ethtool
+  - git-all
+  - tmux
+  - emacs
+
+users:
+  - ciupam

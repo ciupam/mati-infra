@@ -1,0 +1,27 @@
+---
+- name: 'Check if {{ item.key }} is set in GRUB_CMDLINE_LINUX_DEFAULT'
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT=".*{{ item.key }}'
+    state: absent
+  check_mode: true
+  register: grub_cmdline_check
+  changed_when: false
+
+- name: 'Append {{ item.key }}={{ item.value }} to GRUB_CMDLINE_LINUX_DEFAULT'
+  become: yes
+  lineinfile:
+    backrefs: true
+    path: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=".*)"$'
+    line: '\1 {{ item.key }}={{ item.value }}"'
+  when: 'grub_cmdline_check.found == 0 and item.value is defined'
+
+- name: 'Append {{ item.key }} to GRUB_CMDLINE_LINUX_DEFAULT'
+  become: yes
+  lineinfile:
+    backrefs: true
+    path: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=\".*)\"$'
+    line: '\1 {{ item.key }}"'
+  when: 'grub_cmdline_check.found == 0 and item.value is not defined'

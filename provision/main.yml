@@ -1,0 +1,24 @@
+---
+- name: 'Configure common'
+  hosts: all
+  roles:
+    - role: common
+      tags: [ never, common ]
+
+- name: 'Configure kvm'
+  hosts: all
+  roles:
+    - role: kvm
+      tags: [ never, virt, kvm ]
+
+- name: 'Configure libvirt'
+  hosts: all
+  roles:
+    - role: libvirt
+      tags: [ never, virt, libvirt ]
+
+- name: 'Configure iommu'
+  hosts: all
+  roles:
+    - role: iommu
+      tags: [ never, virt, iommu ]

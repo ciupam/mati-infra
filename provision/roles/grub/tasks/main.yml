@@ -1,0 +1,8 @@
+---
+- include_tasks: cmdline_loop.yml
+  when: 'kernel_parameters is defined'
+  loop: "{{ kernel_parameters }}"
+
+- name: 'Update grub'
+  become: yes
+  shell: 'update-grub'

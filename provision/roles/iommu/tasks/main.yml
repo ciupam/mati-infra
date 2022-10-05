@@ -1,0 +1,12 @@
+---
+- include_role:
+    name: grub
+
+- include_tasks: modules_loop.yml
+  loop:
+    - 'vfio'
+    - 'vfio_iommu_type1'
+    - 'vfio_pci'
+    - 'kvm'
+    - 'kvm_amd'
+    - 'vfio_virqfd'
