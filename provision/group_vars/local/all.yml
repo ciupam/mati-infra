@@ -9,6 +9,7 @@ packages:
   - git-all
   - tmux
   - emacs
+  - stow
 
 users:
   - ciupam
