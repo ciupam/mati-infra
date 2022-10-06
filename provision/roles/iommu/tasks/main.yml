@@ -2,6 +2,19 @@
 - include_role:
     name: grub
 
+- name: 'Copy vfio modprobe'
+  become: yes
+  copy:
+    src: 'modprobe/vfio.conf'
+    dest: '/etc/modprobe.d/vfio.conf'
+    mode: '0644'
+  register: modprobe_vfio
+
+- name: 'Update initramfs'
+  become: yes
+  shell: 'update-initramfs -u'
+  when: modprobe_vfio.changed
+
 # - include_tasks: modules_loop.yml
 #   loop:
 #     - 'vfio'
