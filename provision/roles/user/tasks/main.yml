@@ -1,0 +1,9 @@
+---
+- name: 'Add groups=[{{ groups }}] to users=[{{ users }}]'
+  become: yes
+  user:
+    name: "{{ item }}"
+    groups: "{{ user_groups }}"
+    append: yes
+  with_items:
+    - "{{ users }}"
