@@ -1,9 +1,9 @@
 ansible_connection: local
 kernel_parameters:
- - key: 'iommu'
-   value: 'pt'
  - key: 'amd_iommu'
    value: 'on'
+ - key: 'iommu'
+   value: 'pt'
  # - key: 'vfio-pci.ids'
  #   value: '10de:2489,10de:228b'
  # - key: 'rd.driver.pre'

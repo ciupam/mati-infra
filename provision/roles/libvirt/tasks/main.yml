@@ -10,6 +10,39 @@
   vars:
     user_groups: ['libvirt']
 
+- name: 'Copy libvirt qemu hook'
+  become: yes
+  copy:
+    src: 'libvirt/hooks/qemu'
+    dest: '/etc/libvirt/hooks/qemu'
+    mode: '0644'
+
+- name: 'Ensure /etc/libvirt/hooks/qemu.d/win10/prepare/begin/ is created'
+  become: yes
+  file:
+    path: '/etc/libvirt/hooks/qemu.d/win10/prepare/begin'
+    state: 'directory'
+
+- name: 'Copy libvirt qemu start script'
+  become: yes
+  copy:
+    src: 'libvirt/hooks/qemu.d/win10/prepare/begin/start.sh'
+    dest: '/etc/libvirt/hooks/qemu.d/win10/prepare/begin/start.sh'
+    mode: '0644'
+
+- name: 'Ensure /etc/libvirt/hooks/qemu.d/win10/release/end/ is created'
+  become: yes
+  file:
+    path: '/etc/libvirt/hooks/qemu.d/win10/release/end'
+    state: 'directory'
+
+- name: 'Copy libvirt qemu stop script'
+  become: yes
+  copy:
+    src: 'libvirt/hooks/qemu.d/win10/release/end/stop.sh'
+    dest: '/etc/libvirt/hooks/qemu.d/win10/release/end/stop.sh'
+    mode: '0644'
+
 - name: 'Start libvirtd service'
   become: yes
   service:
