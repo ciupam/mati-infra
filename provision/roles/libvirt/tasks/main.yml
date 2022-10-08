@@ -5,14 +5,10 @@
     name: ['libvirt-daemon-system', 'libvirt-clients', 'virt-manager']
     state: present
 
-- name: 'Add "users" to libvirt group'
-  become: yes
-  user:
-    name: "{{ item }}"
-    groups: ['libvirt']
-    append: yes
-  with_items:
-    - "{{ users }}"
+- include_role:
+    name: user
+  vars:
+    user_groups: ['libvirt']
 
 - name: 'Start libvirtd service'
   become: yes
