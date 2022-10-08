@@ -2,7 +2,7 @@
 - name: 'Check if {{ item.key }} is set in GRUB_CMDLINE_LINUX_DEFAULT'
   lineinfile:
     path: /etc/default/grub
-    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT=".*{{ item.key }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT=".*[" ]{{ item.key }}["= ]'
     state: absent
   check_mode: true
   register: grub_cmdline_check
