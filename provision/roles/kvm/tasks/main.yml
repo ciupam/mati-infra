@@ -2,5 +2,12 @@
 - name: 'Install required packages'
   become: yes
   apt:
-    name: ['qemu-system']
+    # Should include: "qemu-utils ovmf"
+    name: ['qemu-system', 'bridge-utils']
     state: present
+
+- include_role:
+    name: user
+  vars:
+    # input and kvm group for passing input devices
+    user_groups: ['kvm', 'input']
