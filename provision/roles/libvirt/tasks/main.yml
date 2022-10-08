@@ -20,3 +20,7 @@
     name: libvirtd
     state: started
     enabled: yes
+
+- name: 'Autostart default network'
+  become: yes
+  shell: 'virsh net-autostart default'
